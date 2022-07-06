@@ -35,21 +35,26 @@ export function Hero() {
         </Button>
       </div>
 
-      <section className="mt-32 mb-12 grid grid-cols-8">
-        {[
-          { name: "Chores" },
-          { name: "Meals" },
-          { name: "Pets" },
-          { name: "Plants" },
-          { name: "Cars" },
-          { name: "Movies" },
-          { name: "Dental" },
-          { name: "Utilities" },
-        ].map((value, i) => (
-          <div key={value.name + i} className="text-3xl font-extrabold">
-            {value.name}
-          </div>
-        ))}
+      <section className="mt-32 mb-12">
+        <p className="font-display mb-4 text-base text-slate-900">
+          Track all sort of things
+        </p>
+        <div className="grid grid-cols-4 gap-12">
+          {[
+            { name: "Chores" },
+            { name: "Meals" },
+            { name: "Pets" },
+            { name: "Plants" },
+            { name: "Cars" },
+            { name: "Movies" },
+            { name: "Dental" },
+            { name: "Utilities" },
+          ].map((value, i) => (
+            <div key={value.name + i} className="text-3xl font-extrabold">
+              {value.name}
+            </div>
+          ))}
+        </div>
       </section>
     </Container>
   );
