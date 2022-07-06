@@ -28,8 +28,6 @@ jobs:
 
       - name: 📥 Download deps
         uses: bahmutov/npm-install@v1
-        with:
-          useLockFile: false
 
       - name: 🔬 Lint
         run: npm run lint
@@ -51,8 +49,6 @@ jobs:
 
       - name: 📥 Download deps
         uses: bahmutov/npm-install@v1
-        with:
-          useLockFile: false
 
       - name: 🔎 Type check
         run: npm run typecheck --if-present
@@ -74,8 +70,6 @@ jobs:
 
       - name: 📥 Download deps
         uses: bahmutov/npm-install@v1
-        with:
-          useLockFile: false
 
       - name: ⚡ Run vitest
         run: npm run test -- --coverage
@@ -104,7 +98,10 @@ jobs:
       - name: 💻 Start up MySQL
         run: docker compose up -d
 
-      - name: 🛠 Setup Database
+      - name: 🛠  Pull prisma
+        run: npx prisma db pull
+
+      - name: 🛠  Push prisma
         run: npx prisma db push
 
       - name: ⚙️ Build
