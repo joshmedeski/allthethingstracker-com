@@ -22,11 +22,11 @@
     "validate": "run-p \"test -- --run\" lint typecheck test:e2e:run"
   },
   "dependencies": {
+    "@netlify/functions": "^1.0.0",
     "@prisma/client": "^4.0.0",
+    "@remix-run/netlify": "^1.6.3",
     "@remix-run/node": "^1.6.3",
     "@remix-run/react": "^1.6.3",
-    "@remix-run/serve": "^1.6.3",
-    "@remix-run/server-runtime": "^1.6.3",
     "bcryptjs": "^2.4.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
