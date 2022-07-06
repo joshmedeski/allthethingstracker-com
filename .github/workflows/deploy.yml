@@ -98,9 +98,6 @@ jobs:
       - name: 📥 Download deps
         uses: bahmutov/npm-install@v1
 
-      - name: 🛠  Pull prisma
-        run: npx prisma db pull
-
       - name: 🛠  Push prisma
         run: npx prisma db push
 
