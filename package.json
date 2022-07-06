@@ -1,5 +1,5 @@
 {
-  "name": "allthethingstracker-com-cade",
+  "name": "allthethingstracker-com",
   "scripts": {
     "build": "run-s build:*",
     "build:css": "npm run generate:css -- --minify",

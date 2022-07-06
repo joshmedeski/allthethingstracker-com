@@ -10,13 +10,14 @@ npx create-remix --template remix-run/indie-stack
 
 ## What's in the stack
 
-- [Fly app deployment](https://fly.io) with [Docker](https://www.docker.com/)
-- Production-ready [SQLite Database](https://sqlite.org)
-- Healthcheck endpoint for [Fly backups region fallbacks](https://fly.io/docs/reference/configuration/#services-http_checks)
-- [GitHub Actions](https://github.com/features/actions) for deploy on merge to production and staging environments
-- Email/Password Authentication with [cookie-based sessions](https://remix.run/docs/en/v1/api/remix#createcookiesessionstorage)
+### Hosting
+
+- [Netlify](https://netlify.com/) deployment to the [Edge](https://www.netlify.com/products/edge) + deploy previews and CI/CD
+- MySQL-compatible serverless database with [PlanetScale](https://planetscale.com)
+- [GitHub Actions](https://github.com/features/actions) for linting, running tests, and
 - Database ORM with [Prisma](https://prisma.io)
 - Styling with [Tailwind](https://tailwindcss.com/)
+- Email/Password Authentication with [cookie-based sessions](https://remix.run/docs/en/v1/api/remix#createcookiesessionstorage)
 - End-to-end testing with [Cypress](https://cypress.io)
 - Local third party request mocking with [MSW](https://mswjs.io)
 - Unit testing with [Vitest](https://vitest.dev) and [Testing Library](https://testing-library.com)
@@ -28,14 +29,14 @@ Not a fan of bits of the stack? Fork it, change it, and use `npx create-remix --
 
 ## Quickstart
 
-Click this button to create a [Gitpod](https://gitpod.io) workspace with the project set up and Fly pre-installed
-
-[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/from-referrer/)
+```
+npx create-remix --template joshmedeski/folk-stack
+```
 
 ## Development
 
 - This step only applies if you've opted out of having the CLI install dependencies for you:
-  
+
   ```sh
   npx remix init
   ```
@@ -86,8 +87,8 @@ Prior to your first deployment, you'll need to do a few things:
 - Create two apps on Fly, one for staging and one for production:
 
   ```sh
-  fly create allthethingstracker-com-cade
-  fly create allthethingstracker-com-cade-staging
+  fly create allthethingstracker-com
+  fly create allthethingstracker-com
   ```
 
   - Initialize Git.
