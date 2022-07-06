@@ -5,6 +5,7 @@ on:
       - main
       - dev
   pull_request: {}
+
 permissions:
   actions: write
   contents: read
@@ -100,6 +101,9 @@ jobs:
       - name: 📥 Download deps
         uses: bahmutov/npm-install@v1
 
+      - name: 💻 Start up MySQL
+        run: docker compose up -d
+
       - name: 🛠 Setup Database
         run: npx prisma db push
 
@@ -109,5 +113,5 @@ jobs:
       - name: 🌳 Cypress run
         uses: cypress-io/github-action@v4
         with:
-          start: docker-compose up -d, npm run start:mocks
+          start: npm run start:mocks
           wait-on: "http://localhost:3000"
