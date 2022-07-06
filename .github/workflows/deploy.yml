@@ -84,6 +84,9 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
 
+      - name: 💻 Start up MySQL
+        run: docker compose up -d
+
       - name: 🏄 Copy test env vars
         run: cp .env.example .env
 
@@ -94,9 +97,6 @@ jobs:
 
       - name: 📥 Download deps
         uses: bahmutov/npm-install@v1
-
-      - name: 💻 Start up MySQL
-        run: docker compose up -d
 
       - name: 🛠  Pull prisma
         run: npx prisma db pull
