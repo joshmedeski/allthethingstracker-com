@@ -4,6 +4,7 @@
   publish = "public"
 
 [dev]
+  framework = "remix"
   command = "remix watch"
   port = 3000
 
