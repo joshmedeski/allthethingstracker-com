@@ -1,4 +1,6 @@
-# Remix Indie Stack
+# All The Things Tracker
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/d8e2f00c-f4ca-414d-9322-b7abb65425b0/deploy-status)](https://app.netlify.com/sites/allthethingstracker-com/deploys)
 
 ![The Remix Indie Stack](https://repository-images.githubusercontent.com/465928257/a241fa49-bd4d-485a-a2a5-5cb8e4ee0abf)
 
