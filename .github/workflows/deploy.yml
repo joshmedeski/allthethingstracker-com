@@ -201,7 +201,7 @@ jobs:
           ORG_NAME: ${{secrets.PLANETSCALE_ORG_NAME}}
           SERVICE_TOKEN: ${{secrets.PLANETSCALE_SERVICE_TOKEN}}
           SERVICE_TOKEN_ID: ${{secrets.PLANETSCALE_SERVICE_TOKEN_ID}}
-        run: create-db-branch.sh
+        run: ./create-db-branch.sh
 
       - name: 🔒 Set env variable (Netlify)
         run : netlify env:import ./.pscale/.env 
