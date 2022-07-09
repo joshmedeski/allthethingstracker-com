@@ -153,6 +153,9 @@ jobs:
           path: ./*
           key: ${{ github.sha }}
 
+      - name: 🛠 Pull Prisma
+        run: npx prisma db pull
+
       - name: 🛠 Push Prisma
         run: npx prisma db push
 
