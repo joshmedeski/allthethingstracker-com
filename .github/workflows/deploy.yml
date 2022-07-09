@@ -194,14 +194,17 @@ jobs:
 
       - name: 🌎 Branch database (PlanetScale)
         timeout-minutes: 3
-        working-directory: .pscale
         env:
           BRANCH_NAME: ${{ github.event.inputs.branch }}
           DB_NAME: ${{secrets.PLANETSCALE_DB_NAME}}
           ORG_NAME: ${{secrets.PLANETSCALE_ORG_NAME}}
           SERVICE_TOKEN: ${{secrets.PLANETSCALE_SERVICE_TOKEN}}
           SERVICE_TOKEN_ID: ${{secrets.PLANETSCALE_SERVICE_TOKEN_ID}}
-        run: ./create-db-branch.sh
+        working-directory: .pscale
+        run: |
+          pwd
+          ls
+          ./create-db-branch.sh
 
       - name: 🔒 Set env variable (Netlify)
         run : netlify env:import ./.pscale/.env 
