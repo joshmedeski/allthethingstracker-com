@@ -339,7 +339,7 @@ export default function Example() {
                   >
                     <p className="order-1 font-semibold text-blue-700">
                       Breakfast
-                    </p
+                    </p>
                     <p className="text-blue-500 group-hover:text-blue-700">
                       <time dateTime="2022-01-12T06:00">6:00 AM</time>
                     </p>
