@@ -207,8 +207,6 @@ jobs:
             }
             core.setOutput('branch_name', branch_name);
 
-      - name: Create DB branch and deploy request- if asked, please click on displayed link to authenticate
-
       - name: 🌎 Branch database (PlanetScale)
         id: branch-db
         timeout-minutes: 3
