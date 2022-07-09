@@ -1,5 +1,7 @@
 #!/bin/bash
 
+. use_pscale_docker_image.sh
+
 MAX_TIMEOUT=180 # 3 minutes (in seconds)
 
 echo "Athenticating with the server..."
