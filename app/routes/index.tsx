@@ -1,9 +1,9 @@
-import type { MetaFunction } from "@remix-run/node";
 import { Link } from "@remix-run/react";
 import { Button } from "~/components/Button";
 import { Container } from "~/components/Container";
 import { Hero } from "~/components/Hero";
 import Logo from "~/components/Logo";
+import Week from "~/components/Week";
 
 import { useOptionalUser } from "~/utils";
 
@@ -11,15 +11,13 @@ export default function Index() {
   const user = useOptionalUser();
   return (
     <>
-      <section className="bg-[#fdfe54]">
+      <section>
         <Container>
-          <header className="flex items-center justify-between px-4 pt-3">
+          <header className="flex items-center justify-between px-4 py-2">
             <Logo />
-            <div className="mb-2">
-              <Button color="blue" href="/register">
-                Get Started
-              </Button>
-            </div>
+            <Button color="blue" href="/register">
+              Get Started
+            </Button>
           </header>
         </Container>
       </section>
@@ -27,6 +25,8 @@ export default function Index() {
       <Container>
         <Hero />
       </Container>
+
+      <Week />
 
       <main className="relative min-h-screen bg-white sm:flex sm:items-center sm:justify-center">
         <div className="relative sm:pb-16 sm:pt-8">

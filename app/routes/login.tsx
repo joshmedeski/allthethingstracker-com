@@ -10,6 +10,7 @@ import * as React from "react";
 import { createUserSession, getUserId } from "~/session.server";
 import { verifyLogin } from "~/models/user.server";
 import { safeRedirect, validateEmail } from "~/utils";
+import Logo from "~/components/Logo";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const userId = await getUserId(request);
@@ -93,6 +94,14 @@ export default function LoginPage() {
   return (
     <div className="flex min-h-full flex-col justify-center">
       <div className="mx-auto w-full max-w-md px-8">
+        <div className="mb-12 text-center">
+          <img
+            src="/all-the-things.jpeg"
+            alt="All the Things"
+            className="mx-auto mb-2 h-32 rounded-xl bg-white"
+          />
+          <h1 className="text-2xl font-extrabold">All The Things Tracker</h1>
+        </div>
         <Form method="post" className="space-y-6">
           <div>
             <label

@@ -41,7 +41,7 @@ export default function App() {
     <html lang="en" className="h-full">
       <head>
         <Meta />
-        <meta name="theme-color" content="#fdfe54" />
+        <meta name="theme-color" content="#f2e96c" />
         <Links />
       </head>
       <body className="h-full">
