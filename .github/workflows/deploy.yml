@@ -166,9 +166,9 @@ jobs:
           wait-on: "http://localhost:3000"
 
   preview:
-    if: github.event_name == 'pull_request'
     name: 🔮 Deploy Preview
     runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'pull_request' }}
     needs: [lint, typecheck, vitest, cypress]
     steps:
       - name: 🛑 Cancel Previous Runs
