@@ -195,7 +195,7 @@ jobs:
       - name: 🌎 Branch database (PlanetScale)
         timeout-minutes: 3
         env:
-          BRANCH_NAME: ${{ github.event.inputs.branch }}
+          BRANCH_NAME: ${{ github.head_ref }}
           DB_NAME: ${{secrets.PLANETSCALE_DB_NAME}}
           ORG_NAME: ${{secrets.PLANETSCALE_ORG_NAME}}
           SERVICE_TOKEN: ${{secrets.PLANETSCALE_SERVICE_TOKEN}}
