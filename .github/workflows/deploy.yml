@@ -170,6 +170,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'pull_request' }}
     # needs: [lint, typecheck, vitest, cypress]
+    needs: [dependencies]
     steps:
       - name: 🛑 Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.9.1
