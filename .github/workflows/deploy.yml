@@ -191,32 +191,16 @@ jobs:
           path: ./*
           key: ${{ github.sha }}
 
-      - name: ✅ Validate branch name
-        id: validate-branch-name
-        uses: actions/github-script@v3
-        env:
-          BRANCH_NAME: ${{ github.event.inputs.branch }}
-        with:
-          github-token: ${{ github.token }}
-          script: |
-            const branch_name = process.env.BRANCH_NAME;
-            if (! /^[a-zA-Z0-9_-]+$/.test(branch_name)) {
-              const error = `The branch name contains illegal characters: ${branch_name}`;
-              core.error(error);
-              core.setFailed(error);
-            }
-            core.setOutput('branch_name', branch_name);
-
       - name: 🌎 Branch database (PlanetScale)
         id: branch-db
         timeout-minutes: 3
         env:
-          BRANCH_NAME: ${{steps.validate_params.outputs.branch_name}}
-          PLANETSCALE_DB_NAME: ${{secrets.DB_NAME}}
-          GITHUB_USER: ${{github.actor}}
-          PLANETSCALE_SERVICE_TOKEN: ${{secrets.PLANETSCALE_SERVICE_TOKEN}}
-          PLANETSCALE_SERVICE_TOKEN_ID: ${{secrets.PLANETSCALE_SERVICE_TOKEN_ID}}
-        run: ./.pscale/create-db-branch.sh "$BRANCH_NAME"
+          BRANCH_NAME: ${{ github.event.inputs.branch }}
+          DB_NAME: ${{secrets.PLANETSCALE_DB_NAME}}
+          ORG_NAME: ${{secrets.PLANETSCALE_ORG_NAME}}
+          SERVICE_TOKEN: ${{secrets.PLANETSCALE_SERVICE_TOKEN}}
+          SERVICE_TOKEN_ID: ${{secrets.PLANETSCALE_SERVICE_TOKEN_ID}}
+        run: ./.pscale/create-db-branch.sh
 
       - name: 🔒 Set env variable (Netlify)
         run : netlify env:import ./.pscale/.env 

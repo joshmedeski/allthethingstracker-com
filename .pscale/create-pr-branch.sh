@@ -1,12 +1,10 @@
 #!/bin/bash
 
-. wait_for_branch_readiness.sh
-
-# TODO: Replace with arguments
-BRANCH_NAME="test" # $1
-DB_NAME="allthethingstracker-com" # $2
-ORG_NAME="medeski-solutions" # $3
 MAX_TIMEOUT=180 # 3 minutes (in seconds)
+
+echo "Athenticating with the server..."
+pscale auth login --service-token $SERVICE_TOKEN --service-token-id $SERVICE_TOKEN_ID
+echo "Authentication successful."
 
 BRANCH_EXISTS=$(pscale branch list -f csv $DB_NAME | sed '1d' | cut -d, -f1 | grep $BRANCH_NAME)
 if [ -n "$BRANCH_EXISTS" ]; then
