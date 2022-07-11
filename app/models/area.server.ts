@@ -12,6 +12,7 @@ export function getArea({
 }) {
   return prisma.area.findFirst({
     where: { id, userId },
+    include: { activities: true },
   });
 }
 

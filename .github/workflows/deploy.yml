@@ -38,138 +38,9 @@ jobs:
           path: ./*
           key: ${{ github.sha }}
 
-  # lint:
-  #   name: ⬣ ESLint
-  #   runs-on: ubuntu-latest
-  #   needs: [dependencies]
-  #   steps:
-  #     - name: 🛑 Cancel Previous Runs
-  #       uses: styfle/cancel-workflow-action@0.9.1
-  #       with:
-  #         access_token: ${{ github.token }}
-  #
-  #     - name: ⬇️ Checkout repo
-  #       uses: actions/checkout@v3
-  #
-  #     - name: ⎔ Setup node
-  #       uses: actions/setup-node@v3
-  #       with:
-  #         node-version: 16
-  #
-  #     - name: 📦 Restore dependencies
-  #       uses: actions/cache@v2
-  #       id: restore-deps
-  #       with:
-  #         path: ./*
-  #         key: ${{ github.sha }}
-  #
-  #     - name: 🔬 Lint
-  #       run: npm run lint
-  #
-  # typecheck:
-  #   name: ʦ TypeScript
-  #   runs-on: ubuntu-latest
-  #   needs: [dependencies]
-  #   steps:
-  #     - name: 🛑 Cancel Previous Runs
-  #       uses: styfle/cancel-workflow-action@0.9.1
-  #       with:
-  #         access_token: ${{ github.token }}
-  #
-  #     - name: ⬇️ Checkout repo
-  #       uses: actions/checkout@v3
-  #
-  #     - name: ⎔ Setup node
-  #       uses: actions/setup-node@v3
-  #       with:
-  #         node-version: 16
-  #
-  #     - name: 📦 Restore dependencies
-  #       uses: actions/cache@v2
-  #       id: restore-deps
-  #       with:
-  #         path: ./*
-  #         key: ${{ github.sha }}
-  #
-  #     - name: 🔎 Type check
-  #       run: npm run typecheck --if-present
-  #
-  # vitest:
-  #   name: ⚡ Vitest
-  #   runs-on: ubuntu-latest
-  #   needs: [dependencies]
-  #   steps:
-  #     - name: 🛑 Cancel Previous Runs
-  #       uses: styfle/cancel-workflow-action@0.9.1
-  #       with:
-  #         access_token: ${{ github.token }}
-  #
-  #     - name: ⬇️ Checkout repo
-  #       uses: actions/checkout@v3
-  #
-  #     - name: ⎔ Setup node
-  #       uses: actions/setup-node@v3
-  #       with:
-  #         node-version: 16
-  #
-  #     - name: 📦 Restore dependencies
-  #       uses: actions/cache@v2
-  #       id: restore-deps
-  #       with:
-  #         path: ./*
-  #         key: ${{ github.sha }}
-  #
-  #     - name: ⚡ Run vitest
-  #       run: npm run test -- --coverage
-  #
-  # cypress:
-  #   name: ⚫️ Cypress
-  #   runs-on: ubuntu-latest
-  #   needs: [dependencies]
-  #   steps:
-  #     - name: 🛑 Cancel Previous Runs
-  #       uses: styfle/cancel-workflow-action@0.9.1
-  #       with:
-  #         access_token: ${{ github.token }}
-  #
-  #     - name: ⬇️ Checkout repo
-  #       uses: actions/checkout@v3
-  #
-  #     - name: 💻 Start up MySQL
-  #       run: docker compose up -d
-  #
-  #     - name: 🏄 Copy test env vars
-  #       run: cp .env.example .env
-  #
-  #     - name: ⎔ Setup node
-  #       uses: actions/setup-node@v3
-  #       with:
-  #         node-version: 16
-  #
-  #     - name: 📦 Restore dependencies
-  #       uses: actions/cache@v2
-  #       id: restore-deps
-  #       with:
-  #         path: ./*
-  #         key: ${{ github.sha }}
-  #
-  #     - name: 🛠 Push Prisma
-  #       run: npx prisma db push
-  #
-  #     - name: ⚙️ Build
-  #       run: npm run build
-  #
-  #     - name: 🌳 Cypress run
-  #       uses: cypress-io/github-action@v4
-  #       with:
-  #         start: npm run start:mocks
-  #         wait-on: "http://localhost:3000"
-
-  preview:
-    name: 🔮 Deploy Preview
+  lint:
+    name: ⬣ ESLint
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'pull_request' }}
-    # needs: [lint, typecheck, vitest, cypress]
     needs: [dependencies]
     steps:
       - name: 🛑 Cancel Previous Runs
@@ -192,21 +63,151 @@ jobs:
           path: ./*
           key: ${{ github.sha }}
 
-      - name: 🌎 Branch database (PlanetScale)
-        timeout-minutes: 3
-        env:
-          BRANCH_NAME: ${{ github.head_ref }}
-          DB_NAME: ${{secrets.PLANETSCALE_DB_NAME}}
-          ORG_NAME: ${{secrets.PLANETSCALE_ORG_NAME}}
-          SERVICE_TOKEN: ${{secrets.PLANETSCALE_SERVICE_TOKEN}}
-          SERVICE_TOKEN_ID: ${{secrets.PLANETSCALE_SERVICE_TOKEN_ID}}
-        working-directory: .pscale
-        run: |
-          echo $BRANCH_NAME
-          ./create_pr_branch.sh
+      - name: 🔬 Lint
+        run: npm run lint
 
-      - name: 🔒 Set env variable (Netlify)
-        run : netlify env:import ./.pscale/.env 
+  typecheck:
+    name: ʦ TypeScript
+    runs-on: ubuntu-latest
+    needs: [dependencies]
+    steps:
+      - name: 🛑 Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          access_token: ${{ github.token }}
 
-      - name: 💿 Deploy preview (Netlify)
-        run: netlify deploy --build --context deploy-preview
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: 📦 Restore dependencies
+        uses: actions/cache@v2
+        id: restore-deps
+        with:
+          path: ./*
+          key: ${{ github.sha }}
+
+      - name: 🔎 Type check
+        run: npm run typecheck --if-present
+
+  vitest:
+    name: ⚡ Vitest
+    runs-on: ubuntu-latest
+    needs: [dependencies]
+    steps:
+      - name: 🛑 Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          access_token: ${{ github.token }}
+
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: 📦 Restore dependencies
+        uses: actions/cache@v2
+        id: restore-deps
+        with:
+          path: ./*
+          key: ${{ github.sha }}
+
+      - name: ⚡ Run vitest
+        run: npm run test -- --coverage
+
+  cypress:
+    name: ⚫️ Cypress
+    runs-on: ubuntu-latest
+    needs: [dependencies]
+    steps:
+      - name: 🛑 Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          access_token: ${{ github.token }}
+
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+
+      - name: 💻 Start up MySQL
+        run: docker compose up -d
+
+      - name: 🏄 Copy test env vars
+        run: cp .env.example .env
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: 📦 Restore dependencies
+        uses: actions/cache@v2
+        id: restore-deps
+        with:
+          path: ./*
+          key: ${{ github.sha }}
+
+      - name: 🛠 Push Prisma
+        run: npx prisma db push
+
+      - name: ⚙️ Build
+        run: npm run build
+
+      - name: 🌳 Cypress run
+        uses: cypress-io/github-action@v4
+        with:
+          start: npm run start:mocks
+          wait-on: "http://localhost:3000"
+
+  # TODO: enable this in the future (just do it locally right now)
+  # preview:
+  #   name: 🔮 Deploy Preview
+  #   runs-on: ubuntu-latest
+  #   if: ${{ github.event_name == 'pull_request' }}
+  #   # needs: [lint, typecheck, vitest, cypress]
+  #   needs: [dependencies]
+  #   steps:
+  #     - name: 🛑 Cancel Previous Runs
+  #       uses: styfle/cancel-workflow-action@0.9.1
+  #       with:
+  #         access_token: ${{ github.token }}
+  #
+  #     - name: ⬇️ Checkout repo
+  #       uses: actions/checkout@v3
+  #
+  #     - name: ⎔ Setup node
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         node-version: 16
+  #
+  #     - name: 📦 Restore dependencies
+  #       uses: actions/cache@v2
+  #       id: restore-deps
+  #       with:
+  #         path: ./*
+  #         key: ${{ github.sha }}
+  #
+  #     - name: 🌎 Branch database (PlanetScale)
+  #       timeout-minutes: 3
+  #       env:
+  #         BRANCH_NAME: ${{ github.head_ref }}
+  #         DB_NAME: ${{secrets.PLANETSCALE_DB_NAME}}
+  #         ORG_NAME: ${{secrets.PLANETSCALE_ORG_NAME}}
+  #         SERVICE_TOKEN: ${{secrets.PLANETSCALE_SERVICE_TOKEN}}
+  #         SERVICE_TOKEN_ID: ${{secrets.PLANETSCALE_SERVICE_TOKEN_ID}}
+  #       working-directory: .pscale
+  #       run: |
+  #         echo $BRANCH_NAME
+  #         ./create_pr_branch.sh
+  #
+  #     - name: 🔒 Set env variable (Netlify)
+  #       run : netlify env:import ./.pscale/.env 
+  #
+  #     - name: 💿 Deploy preview (Netlify)
+  #       run: netlify deploy --build --context deploy-preview
