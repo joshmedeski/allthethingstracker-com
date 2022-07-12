@@ -1,7 +1,7 @@
 import { Activity } from "@prisma/client";
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
-import { Form, Link, useCatch, useLoaderData } from "@remix-run/react";
+import { Form, Link, Outlet, useCatch, useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 
 import type { Area } from "~/models/area.server";
@@ -55,16 +55,18 @@ export default function AreaDetailsPage() {
               </p>
             )}
           </div>
+
+          <Outlet />
         </section>
 
         <Form method="post">
           <h3 className="text-lg font-medium leading-6 text-gray-900">
-            Delete your account
+            Delete this area
           </h3>
           <div className="mt-2 max-w-xl text-sm text-gray-500">
             <p>
-              Once you delete your account, you will lose all data associated
-              with it.
+              Once you delete this area, you will lose all data associated with
+              it.
             </p>
           </div>
           <div className="mt-5">

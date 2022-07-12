@@ -51,6 +51,7 @@ export default function NewAreaPage() {
       }}
     >
       <div>
+        <h3>Add new area</h3>
         <label className="flex w-full flex-col gap-1">
           <span>Name: </span>
           <input

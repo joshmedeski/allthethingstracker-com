@@ -2,8 +2,9 @@ import type { ActionFunction } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
 import * as React from "react";
+import invariant from "tiny-invariant";
 
-import { createArea } from "~/models/area.server";
+import { createActivity } from "~/models/activity.server";
 import { requireUserId } from "~/session.server";
 
 type ActionData = {
@@ -12,8 +13,12 @@ type ActionData = {
   };
 };
 
-export const action: ActionFunction = async ({ request }) => {
+export const action: ActionFunction = async ({
+  request,
+  params: { areaId },
+}) => {
   const userId = await requireUserId(request);
+  invariant(areaId, "areaId not found");
 
   const formData = await request.formData();
   const name = formData.get("name");
@@ -25,12 +30,12 @@ export const action: ActionFunction = async ({ request }) => {
     );
   }
 
-  const area = await createArea({ name, userId });
+  const activity = await createActivity({ name, userId, areaId });
 
-  return redirect(`/areas/${area.id}`);
+  return redirect(`/areas/${areaId}`);
 };
 
-export default function NewAreaPage() {
+export default function NewActivityPage() {
   const actionData = useActionData() as ActionData;
   const nameRef = React.useRef<HTMLInputElement>(null);
 
@@ -50,7 +55,8 @@ export default function NewAreaPage() {
         width: "100%",
       }}
     >
-      <div>
+      <div className="py-4">
+        <h3 className="text-xl font-bold">Add new area</h3>
         <label className="flex w-full flex-col gap-1">
           <span>Name: </span>
           <input
