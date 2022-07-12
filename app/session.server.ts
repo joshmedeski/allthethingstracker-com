@@ -1,4 +1,5 @@
 import { createCookieSessionStorage, redirect } from "@remix-run/node";
+import { createThemeSessionResolver } from "remix-themes";
 import invariant from "tiny-invariant";
 
 import type { User } from "~/models/user.server";
@@ -95,3 +96,17 @@ export async function logout(request: Request) {
     },
   });
 }
+
+export const themeSessionResolver = createThemeSessionResolver(
+  createCookieSessionStorage({
+    cookie: {
+      name: "remix-themes",
+      secure: true,
+      sameSite: "lax",
+      secrets: ["s3cr3t"],
+      path: "/",
+      expires: new Date("2100-08-14"),
+      httpOnly: true,
+    },
+  })
+);

@@ -40,6 +40,8 @@
 
   --color-black: #000000;
   --color-white: #ffffff;
+  --color-foreground: var(--color-black);
+  --color-background: var(--color-white);
 
   --color-neutral-50: #f8fafc;
   --color-neutral-100: #f1f5f9;
@@ -94,7 +96,9 @@
   --color-warning-subtle: var(--color-warning-100);
 }
 
-.dark {
+[data-theme="dark"] {
+  --color-foreground: var(--color-white);
+  --color-background: var(--color-black);
   --color-primary-default: var(--color-primary-400);
   --color-primary-subtle: var(--color-primary-900);
   --color-cta-default: var(--color-cta-400);

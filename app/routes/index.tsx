@@ -3,6 +3,7 @@ import { Button } from "~/components/Button";
 import { Container } from "~/components/Container";
 import { Hero } from "~/components/Hero";
 import Logo from "~/components/Logo";
+import ThemeSelector from "~/components/ThemeSelector";
 import Week from "~/components/Week";
 
 import { useOptionalUser } from "~/utils";
@@ -15,9 +16,12 @@ export default function Index() {
         <Container>
           <header className="flex items-center justify-between px-4 py-2">
             <Logo />
-            <Button color="primary" href="/register">
-              Get Started
-            </Button>
+            <div className="relative flex items-center gap-2">
+              <Button color="primary" href="/register">
+                Get Started
+              </Button>
+              <ThemeSelector />
+            </div>
           </header>
         </Container>
       </section>
@@ -42,7 +46,7 @@ export default function Index() {
               </div>
               <div className="relative px-4 pt-16 pb-8 sm:px-6 sm:pt-24 sm:pb-14 lg:px-8 lg:pb-20 lg:pt-32">
                 <h1 className="text-center text-6xl font-extrabold tracking-tight sm:text-8xl lg:text-9xl">
-                  <span className="text-yellow-500 block uppercase drop-shadow-md">
+                  <span className="block uppercase text-yellow-500 drop-shadow-md">
                     Indie Stack
                   </span>
                 </h1>
@@ -54,7 +58,7 @@ export default function Index() {
                   {user ? (
                     <Link
                       to="/notes"
-                      className="border-transparent text-yellow-700 hover:bg-yellow-50 flex items-center justify-center rounded-md border bg-white px-4 py-3 text-base font-medium shadow-sm sm:px-8"
+                      className="flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-3 text-base font-medium text-yellow-700 shadow-sm hover:bg-yellow-50 sm:px-8"
                     >
                       View Notes for {user.email}
                     </Link>
@@ -62,13 +66,13 @@ export default function Index() {
                     <div className="space-y-4 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5 sm:space-y-0">
                       <Link
                         to="/join"
-                        className="border-transparent text-yellow-700 hover:bg-yellow-50 flex items-center justify-center rounded-md border bg-white px-4 py-3 text-base font-medium shadow-sm sm:px-8"
+                        className="flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-3 text-base font-medium text-yellow-700 shadow-sm hover:bg-yellow-50 sm:px-8"
                       >
                         Sign up
                       </Link>
                       <Link
                         to="/login"
-                        className="bg-yellow-500 hover:bg-yellow-600 flex items-center justify-center rounded-md px-4 py-3 font-medium text-white  "
+                        className="flex items-center justify-center rounded-md bg-yellow-500 px-4 py-3 font-medium text-white hover:bg-yellow-600  "
                       >
                         Log In
                       </Link>

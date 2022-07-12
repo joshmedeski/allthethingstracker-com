@@ -2,12 +2,18 @@ const colors = require("tailwindcss/colors");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./app/**/*.{ts,tsx,jsx,js}"],
+  content: ["./app/**/*.tsx"],
   darkMode: "class",
 
   theme: {
     extend: {
       colors: {
+        foreground: {
+          DEFAULT: "var(--color-foreground)",
+        },
+        background: {
+          DEFAULT: "var(--color-background)",
+        },
         primary: {
           50: "var(--color-primary-50)",
           100: "var(--color-primary-100)",
