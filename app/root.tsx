@@ -22,7 +22,6 @@ import {
   useTheme,
   PreventFlashOnWrongTheme,
 } from "remix-themes";
-import clsx from "clsx";
 
 export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: tailwindStylesheetUrl }];
