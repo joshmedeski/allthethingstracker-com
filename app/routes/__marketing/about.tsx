@@ -1,9 +1,11 @@
-import { Container } from "~/components/Container";
+import Contributors from "~/components/Contributors";
+import Founders from "~/components/Founders";
 
 export default function Index() {
   return (
-    <Container>
-      <h1>Demo (Coming Soon)</h1>
-    </Container>
+    <>
+      <Founders />;
+      <Contributors />
+    </>
   );
 }
