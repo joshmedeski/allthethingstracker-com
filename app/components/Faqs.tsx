@@ -37,9 +37,9 @@ const Faqs: React.FC = () => {
                 href="/help"
                 className="font-medium text-indigo-600 hover:text-indigo-500"
               >
-                customer support
+                help
               </a>{" "}
-              team.
+              page.
             </p>
           </div>
           <div className="mt-12 lg:col-span-2 lg:mt-0">
