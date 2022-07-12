@@ -56,7 +56,7 @@ module.exports = {
           800: "var(--color-uncommon-800)",
           900: "var(--color-uncommon-900)",
           DEFAULT: "var(--color-uncommon-default)",
-          subtle: "var(--color-uncommon-sudbtle)",
+          subtle: "var(--color-uncommon-subtle)",
         },
 
         white: "var(--color-white)",

@@ -1,36 +1,23 @@
 import { Link } from "@remix-run/react";
-import { Button } from "~/components/Button";
 import { Container } from "~/components/Container";
+import Faqs from "~/components/Faqs";
 import { Hero } from "~/components/Hero";
-import Logo from "~/components/Logo";
-import ThemeSelector from "~/components/ThemeSelector";
-import Week from "~/components/Week";
+import MarketingLayout from "~/components/layout/marketing";
+import Pricing from "~/components/Pricing";
 
 import { useOptionalUser } from "~/utils";
 
 export default function Index() {
   const user = useOptionalUser();
   return (
-    <>
-      <section>
-        <Container>
-          <header className="flex items-center justify-between px-4 py-2">
-            <Logo />
-            <div className="relative flex items-center gap-2">
-              <Button color="primary" href="/register">
-                Get Started
-              </Button>
-              <ThemeSelector />
-            </div>
-          </header>
-        </Container>
-      </section>
-
+    <MarketingLayout>
       <Container>
         <Hero />
       </Container>
 
-      <Week />
+      <Pricing />
+
+      <Faqs />
 
       <main className="relative min-h-screen bg-white sm:flex sm:items-center sm:justify-center">
         <div className="relative sm:pb-16 sm:pt-8">
@@ -91,6 +78,6 @@ export default function Index() {
           </div>
         </div>
       </main>
-    </>
+    </MarketingLayout>
   );
 }

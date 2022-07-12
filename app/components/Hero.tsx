@@ -1,5 +1,6 @@
 import { Container } from "~/components/Container";
 import { Button } from "./Button";
+import { CtaLink } from "./layout/marketing/CtaLink";
 
 export function Hero() {
   return (
@@ -24,9 +25,7 @@ export function Hero() {
         your life.
       </p>
       <div className="mt-10 flex justify-center gap-x-6">
-        <Button color="blue" href="/register">
-          Get Started
-        </Button>
+        <CtaLink />
         <Button
           href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
           variant="outline"

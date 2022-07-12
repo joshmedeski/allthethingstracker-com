@@ -9,7 +9,7 @@
   --color-primary-700: #319e9a;
   --color-primary-800: #277e7b;
   --color-primary-900: #20676;
-  --color-primary-default: var(--color-primary-500);
+  --color-primary-default: var(--color-primary-600);
   --color-primary-subtle: var(--color-primary-100);
 
   --color-cta-50: #fdf4f9;

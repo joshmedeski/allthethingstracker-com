@@ -6,9 +6,9 @@ const Logo: React.FC = () => {
       <img
         src="/all-the-things.jpeg"
         alt="All the Things"
-        className="mr-4 h-12 rounded-xl bg-white"
+        className="mr-1 h-12 rounded-xl bg-white"
       />
-      <h1 className="text-2xl font-extrabold">All The Things Tracker</h1>
+      <h1 className="text-2xl font-bold">All The Things Tracker</h1>
     </div>
   );
 };
