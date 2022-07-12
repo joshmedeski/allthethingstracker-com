@@ -1,7 +1,7 @@
 const founders = [
   {
     name: "Josh Medeski",
-    role: "Co-Founder / CEO",
+    role: "Founder / CEO",
     imageUrl:
       "https://pbs.twimg.com/profile_images/1491889750013358087/cCb_rLlz_400x400.jpg",
     bio: "Josh is a multi-passionate individual that saw a need in the productivity space. His background is in full-stack development.",
@@ -17,7 +17,7 @@ export default function Founders() {
         <div className="space-y-12 lg:grid lg:grid-cols-3 lg:gap-8 lg:space-y-0">
           <div className="space-y-5 sm:space-y-4">
             <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
-              Founders
+              Founder{founders.length > 1 ? "s" : ""}
             </h2>
             <p className="text-xl text-gray-500">
               Founded in Summer 2022, here's the team that brought this project
