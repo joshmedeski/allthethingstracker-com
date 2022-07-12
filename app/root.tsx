@@ -11,10 +11,17 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from "@remix-run/react";
 
 import tailwindStylesheetUrl from "./styles/tailwind.css";
-import { getUser } from "./session.server";
+import { getUser, themeSessionResolver } from "./session.server";
+
+import {
+  ThemeProvider,
+  useTheme,
+  PreventFlashOnWrongTheme,
+} from "remix-themes";
 
 export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: tailwindStylesheetUrl }];
@@ -28,28 +35,50 @@ export const meta: MetaFunction = () => ({
 
 type LoaderData = {
   user: Awaited<ReturnType<typeof getUser>>;
+  theme: any;
 };
 
 export const loader: LoaderFunction = async ({ request }) => {
+  const { getTheme } = await themeSessionResolver(request);
+
+  console.log("getTheme: ", getTheme);
+  const theme = getTheme();
+  console.log("theme: ", theme);
+
   return json<LoaderData>({
     user: await getUser(request),
+    theme,
   });
 };
 
-export default function App() {
+function App() {
+  const data = useLoaderData();
+  const [theme] = useTheme();
   return (
-    <html lang="en" className="h-full">
+    <html lang="en" data-theme={theme ?? ""}>
       <head>
         <Meta />
+        <meta charSet="utf-8" />
         <meta name="theme-color" content="#f2e96c" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <PreventFlashOnWrongTheme ssrTheme={Boolean(data.theme)} />
         <Links />
       </head>
-      <body className="h-full">
+      <body className="min-h-full bg-background text-foreground">
         <Outlet />
         <ScrollRestoration />
         <Scripts />
-        <LiveReload />
+        {process.env.NODE_ENV === "development" && <LiveReload />}
       </body>
     </html>
+  );
+}
+
+export default function AppWithProviders() {
+  const data = useLoaderData();
+  return (
+    <ThemeProvider specifiedTheme={data.theme} themeAction="/action/set-theme">
+      <App />
+    </ThemeProvider>
   );
 }

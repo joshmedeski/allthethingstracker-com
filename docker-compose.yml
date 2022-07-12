@@ -6,7 +6,7 @@ services:
     container_name: db
     environment:
       MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: allthethingstracker
+      MYSQL_DATABASE: allthethingstracker-com
     ports:
       - "3306:3306"
     volumes:

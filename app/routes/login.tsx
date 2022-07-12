@@ -10,7 +10,6 @@ import * as React from "react";
 import { createUserSession, getUserId } from "~/session.server";
 import { verifyLogin } from "~/models/user.server";
 import { safeRedirect, validateEmail } from "~/utils";
-import Logo from "~/components/Logo";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const userId = await getUserId(request);
@@ -92,15 +91,17 @@ export default function LoginPage() {
   }, [actionData]);
 
   return (
-    <div className="flex min-h-full flex-col justify-center">
+    <div className="flex min-h-[100vh] flex-col justify-center">
       <div className="mx-auto w-full max-w-md px-8">
         <div className="mb-12 text-center">
-          <img
-            src="/all-the-things.jpeg"
-            alt="All the Things"
-            className="mx-auto mb-2 h-32 rounded-xl bg-white"
-          />
-          <h1 className="text-2xl font-extrabold">All The Things Tracker</h1>
+          <Link to="/">
+            <img
+              src="/all-the-things.jpeg"
+              alt="All the Things"
+              className="mx-auto mb-2 h-32 rounded-xl bg-white"
+            />
+            <h1 className="text-2xl font-extrabold">All The Things Tracker</h1>
+          </Link>
         </div>
         <Form method="post" className="space-y-6">
           <div>
@@ -160,7 +161,7 @@ export default function LoginPage() {
           <input type="hidden" name="redirectTo" value={redirectTo} />
           <button
             type="submit"
-            className="w-full rounded bg-blue-500  py-2 px-4 text-white hover:bg-blue-600 focus:bg-blue-400"
+            className="w-full rounded bg-primary py-2 px-4 text-white hover:bg-primary focus:bg-blue-400"
           >
             Log in
           </button>
@@ -184,7 +185,7 @@ export default function LoginPage() {
               <Link
                 className="text-blue-500 underline"
                 to={{
-                  pathname: "/join",
+                  pathname: "/get-started",
                   search: searchParams.toString(),
                 }}
               >
