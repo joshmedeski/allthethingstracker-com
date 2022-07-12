@@ -22,11 +22,11 @@ const LayoutHeader: React.FC = () => {
         <div className="flex items-center gap-2">
           <Logo />
           <div className="ml-4 mt-1 flex items-center gap-6">
-            <LayoutHeaderNavItem name="Demo" href="/help" />
+            <LayoutHeaderNavItem name="Pricing" href="/pricing" />
+            <LayoutHeaderNavItem name="Demo" href="/demo" />
             <LayoutHeaderNavItem name="About" href="/about" />
             <LayoutHeaderNavItem name="Blog" href="/blog" />
             <LayoutHeaderNavItem name="Help" href="/help" />
-            <LayoutHeaderNavItem name="Pricing" href="/help" />
           </div>
         </div>
 

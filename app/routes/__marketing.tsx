@@ -1,12 +1,14 @@
-import React from "react";
-import MarketingHeader from "./MarketingHeader";
+import { Outlet } from "@remix-run/react";
+import MarketingHeader from "~/components/layout/marketing/MarketingHeader";
 
-const MarketingLayout: React.FC = ({ children }) => {
+const MarketingLayout: React.FC = () => {
   return (
     <div className="flex min-h-[100vh] flex-col justify-between">
       <section>
         <MarketingHeader />
-        <div>{children}</div>
+        <div>
+          <Outlet />
+        </div>
       </section>
       <footer>Footer</footer>
     </div>

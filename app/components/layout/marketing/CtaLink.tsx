@@ -10,17 +10,17 @@ export const CtaLink: React.FC = ({ children }) => {
         "w-full rounded-xl sm:w-auto",
         "relative inline-flex items-stretch",
         "transition-slowest ease group",
-        "shadow-lg shadow-cta-200 dark:shadow-cta-800",
+        "shadow-lg shadow-cta-subtle",
         "font-bold tracking-wider",
-        "bg-cta-600",
+        "bg-cta",
         "bg-gradient-to-r",
-        "from-cta-600 to-cta-500",
-        "text-white",
+        "from-cta to-cta",
+        "text-background",
       ])}
     >
       <span
         className={clsx([
-          "bg-cta-500 bg-opacity-10",
+          "bg-cta-subtle bg-opacity-10",
           "-top-4 -right-2",
           "group-hover:ovwerflow-hidden absolute",
           "h-16 w-16 group-hover:w-full",
