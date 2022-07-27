@@ -1,9 +1,23 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Fragment, useState } from "react";
 import { Combobox, Dialog, Transition } from "@headlessui/react";
 import clsx from "clsx";
+import { useDebouncedCallback } from "use-debounce";
+import { useFetcher } from "@remix-run/react";
+import { GifsResult } from "@giphy/js-fetch-api";
 
 const people = [{ id: 1, name: "Leslie Alexander", url: "#" }];
+
+const ImageIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 448 512"
+    style={{ fill: "currentColor" }}
+    {...props}
+  >
+    <path d="M145.7 230.6l-46.67 64c-3.549 4.863-4.064 11.31-1.334 16.68C100.5 316.6 105.1 320 112 320h224c5.9 0 11.32-3.246 14.11-8.449c2.783-5.203 2.479-11.52-.7949-16.43l-85.33-128C261 162.7 256 160 250.7 160s-10.35 2.672-13.31 7.125L183.8 247.4L171.6 230.6C168.6 226.4 163.8 224 158.7 224S148.8 226.4 145.7 230.6zM400 32h-352C21.6 32 0 53.6 0 80v352C0 458.4 21.6 480 48 480h352c26.4 0 48-21.6 48-48v-352C448 53.6 426.4 32 400 32zM384 352H64V96h320V352zM128 192c17.62 0 32-14.38 32-32S145.6 128 128 128S96 142.4 96 160S110.4 192 128 192z" />
+  </svg>
+);
 
 const SearchIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   <svg
@@ -16,93 +30,118 @@ const SearchIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   </svg>
 );
 
-const GifSearchModal: React.FC = () => {
-  const [query, setQuery] = useState("");
-
-  const [open, setOpen] = useState(true);
-
-  const filteredPeople =
-    query === ""
-      ? []
-      : people.filter((person) => {
-          return person.name.toLowerCase().includes(query.toLowerCase());
-        });
+const GifSearchModal: React.FC<{ onSelect: (imageUrl: string) => void }> = ({
+  onSelect,
+}) => {
+  const [open, setOpen] = useState(false);
+  const gifSearch = useFetcher<GifsResult>();
+  const ref = useRef<HTMLFormElement | null>(null);
+  const [selection, setSelection] = useState<string>();
 
   return (
-    <Transition.Root
-      show={open}
-      as={Fragment}
-      afterLeave={() => setQuery("")}
-      appear
-    >
-      <Dialog as="div" className="relative z-10" onClose={setOpen}>
-        <Transition.Child
-          as={Fragment}
-          enter="ease-out duration-300"
-          enterFrom="opacity-0"
-          enterTo="opacity-100"
-          leave="ease-in duration-200"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
+    <>
+      {selection ? (
+        <button
+          onClick={() => {
+            setOpen(true);
+          }}
+          className="group block aspect-video w-full bg-neutral bg-cover bg-center"
+          style={{
+            backgroundImage: `url(${selection})`,
+          }}
         >
-          <div className="fixed inset-0 bg-neutral-subtle bg-opacity-25 transition-opacity" />
-        </Transition.Child>
+          <div className="invisible flex h-full w-full flex-col items-center justify-center bg-primary font-bold text-black opacity-50 transition group-hover:visible group-focus:visible">
+            <span>Change</span>
+          </div>
+        </button>
+      ) : (
+        <button
+          onClick={() => setOpen(true)}
+          className="group grid aspect-video w-full place-content-center rounded-lg border-2 border-dashed border-neutral bg-neutral-subtle p-4 text-center transition hover:border-primary hover:bg-primary-subtle focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+        >
+          <ImageIcon className="mx-auto h-20 w-20 text-neutral" />
+          <span className="text-xl font-bold text-neutral">Choose Image</span>
+        </button>
+      )}
 
-        <div className="fixed inset-0 z-10 overflow-y-auto p-4 sm:p-6 md:p-20">
+      <Transition.Root show={open} as={Fragment} appear>
+        <Dialog as="div" className="relative z-10" onClose={setOpen}>
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
-            enterFrom="opacity-0 scale-95"
-            enterTo="opacity-100 scale-100"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
             leave="ease-in duration-200"
-            leaveFrom="opacity-100 scale-100"
-            leaveTo="opacity-0 scale-95"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
           >
-            <Dialog.Panel className="mx-auto max-w-xl transform divide-y divide-gray-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all">
-              <Combobox value={query} onChange={(person) => setQuery(person)}>
-                <div className="relative">
-                  <SearchIcon
-                    className="pointer-events-none absolute top-3.5 left-4 h-5 w-5 text-gray-400"
-                    aria-hidden="true"
-                  />
-                  <Combobox.Input
-                    className="h-12 w-full border-0 bg-transparent pl-11 pr-4 text-gray-800 placeholder-gray-400 focus:ring-0 sm:text-sm"
-                    placeholder="Search..."
-                    onChange={(event) => setQuery(event.target.value)}
-                  />
-                </div>
-
-                {filteredPeople.length > 0 && (
-                  <Combobox.Options
-                    static
-                    className="max-h-72 scroll-py-2 overflow-y-auto py-2 text-sm text-gray-800"
-                  >
-                    {filteredPeople.map((person) => (
-                      <Combobox.Option
-                        key={person.id}
-                        value={person}
-                        className={({ active }) =>
-                          clsx(
-                            "cursor-default select-none px-4 py-2",
-                            active && "bg-indigo-600 text-white"
-                          )
-                        }
-                      >
-                        {person.name}
-                      </Combobox.Option>
-                    ))}
-                  </Combobox.Options>
-                )}
-
-                {query !== "" && filteredPeople.length === 0 && (
-                  <p className="p-4 text-sm text-gray-500">No people found.</p>
-                )}
-              </Combobox>
-            </Dialog.Panel>
+            <div className="bg-neutral-subtle/50 fixed inset-0 bg-opacity-25 transition-opacity" />
           </Transition.Child>
-        </div>
-      </Dialog>
-    </Transition.Root>
+
+          <div className="fixed inset-0 z-10 overflow-y-auto p-4 sm:p-6 md:p-20">
+            <Transition.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0 scale-95"
+              enterTo="opacity-100 scale-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100 scale-100"
+              leaveTo="opacity-0 scale-95"
+            >
+              <Dialog.Panel className="mx-auto max-w-xl transform overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-neutral ring-opacity-5 transition-all">
+                <SearchIcon
+                  className="pointer-events-none absolute top-3.5 left-4 h-5 w-5 text-neutral"
+                  aria-hidden="true"
+                />
+                <gifSearch.Form ref={ref} method="post" action="/gif/search">
+                  <div>
+                    <div className="relative mt-1 flex items-center">
+                      <input
+                        type="text"
+                        name="term"
+                        className="h-12 w-full border-0 bg-transparent pl-11 pr-4 text-gray-800 placeholder-gray-400 focus:ring-0 sm:text-sm"
+                      />
+                      <div className="absolute inset-y-0 right-0 flex py-1.5 pr-1.5">
+                        <button
+                          type="submit"
+                          className="inline-flex items-center rounded bg-primary px-2 text-sm font-medium text-white"
+                          disabled={gifSearch.state === "submitting"}
+                        >
+                          Search
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  {gifSearch.type === "done" && !!gifSearch.data.data && (
+                    <section className="grid grid-cols-2 gap-2 p-2">
+                      {gifSearch.data.data.map((gif) => (
+                        <button
+                          key={gif.id}
+                          onClick={() => {
+                            setSelection(gif.images.original.url);
+                            onSelect(gif.images.original.url);
+                            setOpen(false);
+                          }}
+                          className="group block aspect-video w-full bg-neutral bg-cover bg-center"
+                          style={{
+                            backgroundImage: `url(${gif.images.downsized_large.url})`,
+                          }}
+                        >
+                          <div className="invisible flex h-full w-full flex-col items-center justify-center bg-primary font-bold text-black opacity-50 transition group-hover:visible group-focus:visible">
+                            <span>Choose</span>
+                          </div>
+                        </button>
+                      ))}
+                    </section>
+                  )}
+                </gifSearch.Form>
+              </Dialog.Panel>
+            </Transition.Child>
+          </div>
+        </Dialog>
+      </Transition.Root>
+    </>
   );
 };
 

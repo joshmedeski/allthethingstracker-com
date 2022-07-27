@@ -27,17 +27,16 @@ export function getAreaListItems({ userId }: { userId: User["id"] }) {
 export function createArea({
   name,
   userId,
-}: Pick<Area, "name"> & {
-  userId: User["id"];
-}) {
+  imageUrl,
+}: Pick<Area, "name"> &
+  Pick<Area, "imageUrl"> & {
+    userId: User["id"];
+  }) {
   return prisma.area.create({
     data: {
       name,
-      user: {
-        connect: {
-          id: userId,
-        },
-      },
+      imageUrl,
+      user: { connect: { id: userId } },
     },
   });
 }

@@ -1,8 +1,9 @@
 import type { ActionFunction } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
-import * as React from "react";
+import React from "react";
 import BackToAreasLink from "~/components/areas/BackToAreasLink";
+import GifSearchModal from "~/components/giphy/GifSearchModal";
 
 import { createArea } from "~/models/area.server";
 import { requireUserId } from "~/session.server";
@@ -18,6 +19,7 @@ export const action: ActionFunction = async ({ request }) => {
 
   const formData = await request.formData();
   const name = formData.get("name");
+  const imageUrl = formData.get("imageUrl");
 
   if (typeof name !== "string" || name.length === 0) {
     return json<ActionData>(
@@ -26,14 +28,21 @@ export const action: ActionFunction = async ({ request }) => {
     );
   }
 
-  const area = await createArea({ name, userId });
+  if (typeof imageUrl !== "string" || name.length === 0) {
+    return json<ActionData>(
+      { errors: { name: "Image is required" } },
+      { status: 400 }
+    );
+  }
 
+  const area = await createArea({ name, userId, imageUrl });
   return redirect(`/areas/${area.id}`);
 };
 
 export default function NewAreaPage() {
   const actionData = useActionData() as ActionData;
   const nameRef = React.useRef<HTMLInputElement>(null);
+  const [imageUrl, setImageUrl] = React.useState<string>();
 
   React.useEffect(() => {
     if (actionData?.errors?.name) {
@@ -42,11 +51,18 @@ export default function NewAreaPage() {
   }, [actionData]);
 
   return (
-    <section>
+    <section className="mx-auto max-w-screen-sm">
       <BackToAreasLink />
-      <Form method="post" className="mx-auto max-w-screen-sm">
+
+      <h1 className="mb-4 text-2xl font-bold">Add new area</h1>
+
+      <div className="mb-4">
+        <GifSearchModal onSelect={(imageUrl) => setImageUrl(imageUrl)} />
+      </div>
+
+      <Form method="post">
         <div>
-          <h1 className="mb-4 text-2xl font-bold">Add new area</h1>
+          <input value={imageUrl} name="imageUrl" type="hidden" />
           <label className="flex w-full flex-col gap-1">
             <span>Name</span>
             <input
@@ -71,7 +87,7 @@ export default function NewAreaPage() {
             type="submit"
             className="rounded bg-primary py-2 px-4 font-bold tracking-wider text-white"
           >
-            Save
+            Add
           </button>
         </div>
       </Form>

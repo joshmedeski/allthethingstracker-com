@@ -12,18 +12,18 @@ const NewIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   </svg>
 );
 
-const NewAreaPlaceholder: React.FC = () => {
+const NewActivityPlaceholder: React.FC = () => {
   return (
     <Link
-      to="/areas/new"
+      to="new"
       className="group grid aspect-video place-content-center rounded-3xl border-2 border-dashed border-neutral bg-neutral-subtle text-center transition hover:border-primary hover:bg-primary-subtle focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
     >
       <NewIcon className="mx-auto h-12 w-12 text-neutral group-hover:text-primary" />
       <span className="text-lg font-bold text-neutral group-hover:text-primary">
-        Create a new area
+        Create a new activity
       </span>
     </Link>
   );
 };
 
-export default NewAreaPlaceholder;
+export default NewActivityPlaceholder;

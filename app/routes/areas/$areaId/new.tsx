@@ -3,6 +3,7 @@ import { json, redirect } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
 import * as React from "react";
 import invariant from "tiny-invariant";
+import BackToAreaLink from "~/components/activities/BackToAreaLink";
 
 import { createActivity } from "~/models/activity.server";
 import { requireUserId } from "~/session.server";
@@ -30,7 +31,7 @@ export const action: ActionFunction = async ({
     );
   }
 
-  const activity = await createActivity({ name, userId, areaId });
+  await createActivity({ name, userId, areaId });
 
   return redirect(`/areas/${areaId}`);
 };
@@ -46,15 +47,16 @@ export default function NewActivityPage() {
   }, [actionData]);
 
   return (
-    <section>
-      <Form method="post" className="mx-auto max-w-screen-sm">
+    <section className="mx-auto max-w-screen-sm">
+      <BackToAreaLink />
+      <Form method="post">
         <h3 className="text-2xl font-bold">Add new area</h3>
-        <label className="flex w-full flex-col gap-1">
-          <span>Name: </span>
+        <label className="mb-4 flex w-full flex-col gap-1">
+          <span>Name</span>
           <input
             ref={nameRef}
             name="name"
-            className="flex-1 rounded-md border-2 border-blue-500 px-3 text-lg leading-loose"
+            className="flex-1 rounded-md border-2 border-primary px-3 text-lg leading-loose"
             aria-invalid={actionData?.errors?.name ? true : undefined}
             aria-errormessage={
               actionData?.errors?.name ? "name-error" : undefined
@@ -62,7 +64,7 @@ export default function NewActivityPage() {
           />
         </label>
         {actionData?.errors?.name && (
-          <div className="pt-1 text-red-700" id="name-error">
+          <div className="pt-1 text-error" id="name-error">
             {actionData.errors.name}
           </div>
         )}
@@ -70,7 +72,7 @@ export default function NewActivityPage() {
         <div className="text-right">
           <button
             type="submit"
-            className="rounded bg-blue-500 py-2 px-4 text-white hover:bg-blue-600 focus:bg-blue-400"
+            className="rounded bg-primary py-2 px-4 text-white hover:bg-blue-600 focus:bg-blue-400"
           >
             Save
           </button>
