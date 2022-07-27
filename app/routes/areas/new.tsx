@@ -2,6 +2,7 @@ import type { ActionFunction } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
 import * as React from "react";
+import BackToAreasLink from "~/components/areas/BackToAreasLink";
 
 import { createArea } from "~/models/area.server";
 import { requireUserId } from "~/session.server";
@@ -41,36 +42,39 @@ export default function NewAreaPage() {
   }, [actionData]);
 
   return (
-    <Form method="post" className="mx-auto max-w-screen-sm">
-      <div>
-        <h1 className="mb-4 text-2xl font-bold">Add new area</h1>
-        <label className="flex w-full flex-col gap-1">
-          <span>Name</span>
-          <input
-            ref={nameRef}
-            name="name"
-            className="mb-2 flex-1 rounded-md border-2 border-blue-500 px-3 text-lg leading-loose"
-            aria-invalid={actionData?.errors?.name ? true : undefined}
-            aria-errormessage={
-              actionData?.errors?.name ? "name-error" : undefined
-            }
-          />
-        </label>
-        {actionData?.errors?.name && (
-          <div className="pt-1 text-red-700" id="name-error">
-            {actionData.errors.name}
-          </div>
-        )}
-      </div>
+    <section>
+      <BackToAreasLink />
+      <Form method="post" className="mx-auto max-w-screen-sm">
+        <div>
+          <h1 className="mb-4 text-2xl font-bold">Add new area</h1>
+          <label className="flex w-full flex-col gap-1">
+            <span>Name</span>
+            <input
+              ref={nameRef}
+              name="name"
+              className="mb-2 flex-1 rounded-md border-2 border-primary px-3 text-lg leading-loose"
+              aria-invalid={actionData?.errors?.name ? true : undefined}
+              aria-errormessage={
+                actionData?.errors?.name ? "name-error" : undefined
+              }
+            />
+          </label>
+          {actionData?.errors?.name && (
+            <div className="text-error" id="name-error">
+              {actionData.errors.name}
+            </div>
+          )}
+        </div>
 
-      <div className="text-right">
-        <button
-          type="submit"
-          className="rounded bg-blue-500 py-2 px-4 text-white hover:bg-blue-600 focus:bg-blue-400"
-        >
-          Save
-        </button>
-      </div>
-    </Form>
+        <div className="text-right">
+          <button
+            type="submit"
+            className="rounded bg-primary py-2 px-4 font-bold tracking-wider text-white"
+          >
+            Save
+          </button>
+        </div>
+      </Form>
+    </section>
   );
 }

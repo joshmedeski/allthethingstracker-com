@@ -2,6 +2,7 @@ import type { ActionArgs, LoaderArgs, LoaderFunction } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { Form, Link, Outlet, useCatch, useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
+import BackToAreasLink from "~/components/areas/BackToAreasLink";
 
 import { deleteArea } from "~/models/area.server";
 import { getArea } from "~/models/area.server";
@@ -27,6 +28,7 @@ export default function AreaDetailsPage() {
 
   return (
     <div>
+      <BackToAreasLink />
       <h1 className="text-2xl font-bold">{area.name}</h1>
       <hr className="my-4" />
 
