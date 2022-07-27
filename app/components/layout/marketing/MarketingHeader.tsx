@@ -31,7 +31,7 @@ const LayoutHeader: React.FC = () => {
         </div>
 
         {user ? (
-          <LayoutHeaderNavItem name="Go to Dashboard" href="/dashboard" />
+          <LayoutHeaderNavItem name="Go to App" href="/areas" />
         ) : (
           <div className="flex items-center gap-6">
             <LayoutHeaderNavItem name="Login" href="/login" />

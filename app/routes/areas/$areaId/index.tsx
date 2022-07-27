@@ -3,6 +3,7 @@ import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import NewActivityPlaceholder from "~/components/activities/NewActivityPlaceholder";
+import Image from "~/components/giphy/Image";
 
 import { getArea } from "~/models/area.server";
 import { requireUserId } from "~/session.server";
@@ -24,7 +25,10 @@ export default function AreaIndexPage() {
       <section className="grid grid-cols-3 gap-6">
         {area.activities.map((activity) => (
           <div key={activity.id}>
-            <h4 className="mb-2 text-2xl font-semibold">{activity.name}</h4>
+            <Image imageUrl={activity.imageUrl} />
+            <h4 className="mt-3 text-center text-2xl font-bold">
+              {activity.name}
+            </h4>
           </div>
         ))}
         <NewActivityPlaceholder />

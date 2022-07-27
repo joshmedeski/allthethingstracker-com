@@ -4,6 +4,7 @@ import { Form, useActionData } from "@remix-run/react";
 import * as React from "react";
 import invariant from "tiny-invariant";
 import BackToAreaLink from "~/components/activities/BackToAreaLink";
+import GifSearchModal from "~/components/giphy/GifSearchModal";
 
 import { createActivity } from "~/models/activity.server";
 import { requireUserId } from "~/session.server";
@@ -23,6 +24,7 @@ export const action: ActionFunction = async ({
 
   const formData = await request.formData();
   const name = formData.get("name");
+  const imageUrl = formData.get("imageUrl");
 
   if (typeof name !== "string" || name.length === 0) {
     return json<ActionData>(
@@ -31,7 +33,14 @@ export const action: ActionFunction = async ({
     );
   }
 
-  await createActivity({ name, userId, areaId });
+  if (typeof imageUrl !== "string" || name.length === 0) {
+    return json<ActionData>(
+      { errors: { name: "Image is required" } },
+      { status: 400 }
+    );
+  }
+
+  await createActivity({ name, imageUrl, userId, areaId });
 
   return redirect(`/areas/${areaId}`);
 };
@@ -39,6 +48,7 @@ export const action: ActionFunction = async ({
 export default function NewActivityPage() {
   const actionData = useActionData() as ActionData;
   const nameRef = React.useRef<HTMLInputElement>(null);
+  const [imageUrl, setImageUrl] = React.useState<string>();
 
   React.useEffect(() => {
     if (actionData?.errors?.name) {
@@ -49,8 +59,15 @@ export default function NewActivityPage() {
   return (
     <section className="mx-auto max-w-screen-sm">
       <BackToAreaLink />
+
+      <h3 className="text-2xl font-bold">Add new activity</h3>
+
+      <div className="mb-4">
+        <GifSearchModal onSelect={(imageUrl) => setImageUrl(imageUrl)} />
+      </div>
+
       <Form method="post">
-        <h3 className="text-2xl font-bold">Add new area</h3>
+        <input value={imageUrl} name="imageUrl" type="hidden" />
         <label className="mb-4 flex w-full flex-col gap-1">
           <span>Name</span>
           <input

@@ -25,15 +25,18 @@ export function getActivityListItems({ userId }: { userId: User["id"] }) {
 
 export function createActivity({
   name,
+  imageUrl,
   areaId,
   userId,
-}: Pick<Activity, "name"> & {
-  userId: User["id"];
-  areaId: Area["id"];
-}) {
+}: Pick<Activity, "name"> &
+  Pick<Activity, "imageUrl"> & {
+    userId: User["id"];
+    areaId: Area["id"];
+  }) {
   return prisma.activity.create({
     data: {
       name,
+      imageUrl,
       area: {
         connect: {
           id: areaId,
