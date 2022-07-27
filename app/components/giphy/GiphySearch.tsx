@@ -23,7 +23,7 @@ const GiphySearch: React.FC = () => {
 
       <section className="grid grid-cols-4 gap-4">
         {gifSearch.type === "done" &&
-          gifSearch.data &&
+          !!gifSearch.data.data &&
           gifSearch.data.data.map((gif) => (
             <div
               key={gif.id}
