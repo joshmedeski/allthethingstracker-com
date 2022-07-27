@@ -16,6 +16,7 @@ export const action: ActionFunction = async ({ request }) => {
       limit: 10,
       type: "gifs",
     });
+    console.log(results.data[0]);
     return json(results);
   } catch (error) {
     if (errorHasMessage(error)) {

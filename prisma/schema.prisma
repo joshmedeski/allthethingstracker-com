@@ -20,9 +20,6 @@ model User {
   areas      Area[]
   activities Activity[]
   events     Event[]
-
-  // TODO: remove after demo code is removed
-  notes Note[]
 }
 
 model Password {
@@ -34,6 +31,7 @@ model Password {
 model Area {
   id   String @id @default(cuid())
   name String
+  imageUrl String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -82,17 +80,5 @@ model Event {
   @@index([activityId])
 
   isPublic Boolean @default(false)
-}
-
-// TODO: remove after demo code is removed
-model Note {
-  id    String @id @default(cuid())
-  title String
-  body  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  userId String
-  @@index([userId])
 }
 

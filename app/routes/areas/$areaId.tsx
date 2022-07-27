@@ -1,27 +1,21 @@
-import { Activity } from "@prisma/client";
-import type { ActionFunction, LoaderFunction } from "@remix-run/node";
+import type { ActionArgs, LoaderArgs, LoaderFunction } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { Form, Link, Outlet, useCatch, useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 
-import type { Area } from "~/models/area.server";
 import { deleteArea } from "~/models/area.server";
 import { getArea } from "~/models/area.server";
 import { requireUserId } from "~/session.server";
 
-type LoaderData = {
-  area: Area & { activities: Activity[] };
-};
-
-export const loader: LoaderFunction = async ({ request, params }) => {
+export const loader = async ({ request, params }: LoaderArgs) => {
   const userId = await requireUserId(request);
   invariant(params.areaId, "areaId not found");
   const area = await getArea({ userId, id: params.areaId });
   if (!area) throw new Response("Not Found", { status: 404 });
-  return json<LoaderData>({ area });
+  return json({ area });
 };
 
-export const action: ActionFunction = async ({ request, params }) => {
+export const action = async ({ request, params }: ActionArgs) => {
   const userId = await requireUserId(request);
   invariant(params.areaId, "areaId not found");
   await deleteArea({ userId, id: params.areaId });
@@ -29,7 +23,7 @@ export const action: ActionFunction = async ({ request, params }) => {
 };
 
 export default function AreaDetailsPage() {
-  const { area } = useLoaderData() as LoaderData;
+  const { area } = useLoaderData<typeof loader>();
 
   return (
     <div>
@@ -59,7 +53,10 @@ export default function AreaDetailsPage() {
           <Outlet />
         </section>
 
-        <Form method="post">
+        <Form
+          method="post"
+          className="rounded-lg border border-warning bg-warning-subtle p-4"
+        >
           <h3 className="text-lg font-medium leading-6 text-gray-900">
             Delete this area
           </h3>
@@ -72,9 +69,9 @@ export default function AreaDetailsPage() {
           <div className="mt-5">
             <button
               type="submit"
-              className="inline-flex items-center justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 font-medium text-red-700 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:text-sm"
+              className="rounded-md border border-transparent bg-warning px-4 py-2 font-medium text-black hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:text-sm"
             >
-              Delete account
+              Delete {area.name} Area
             </button>
           </div>
         </Form>

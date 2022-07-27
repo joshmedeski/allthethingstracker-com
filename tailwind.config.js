@@ -119,7 +119,7 @@ module.exports = {
           800: "var(--color-warning-800)",
           900: "var(--color-warning-900)",
           DEFAULT: "var(--color-warning-default)",
-          subtle: "var(--color-warning-sudbtle)",
+          subtle: "var(--color-warning-subtle)",
         },
       },
       extend: {},

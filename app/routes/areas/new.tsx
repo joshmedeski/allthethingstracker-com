@@ -41,23 +41,15 @@ export default function NewAreaPage() {
   }, [actionData]);
 
   return (
-    <Form
-      method="post"
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: 8,
-        width: "100%",
-      }}
-    >
+    <Form method="post" className="mx-auto max-w-screen-sm">
       <div>
-        <h3>Add new area</h3>
+        <h1 className="mb-4 text-2xl font-bold">Add new area</h1>
         <label className="flex w-full flex-col gap-1">
-          <span>Name: </span>
+          <span>Name</span>
           <input
             ref={nameRef}
             name="name"
-            className="flex-1 rounded-md border-2 border-blue-500 px-3 text-lg leading-loose"
+            className="mb-2 flex-1 rounded-md border-2 border-blue-500 px-3 text-lg leading-loose"
             aria-invalid={actionData?.errors?.name ? true : undefined}
             aria-errormessage={
               actionData?.errors?.name ? "name-error" : undefined

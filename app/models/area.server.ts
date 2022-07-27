@@ -19,7 +19,7 @@ export function getArea({
 export function getAreaListItems({ userId }: { userId: User["id"] }) {
   return prisma.area.findMany({
     where: { userId },
-    select: { id: true, name: true },
+    select: { id: true, name: true, imageUrl: true },
     orderBy: { updatedAt: "desc" },
   });
 }
