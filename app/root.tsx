@@ -29,7 +29,7 @@ export const links: LinksFunction = () => {
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
-  title: "Remix Notes",
+  title: "All the Things Tracker",
   viewport: "width=device-width,initial-scale=1",
 });
 
