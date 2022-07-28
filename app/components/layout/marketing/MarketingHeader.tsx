@@ -6,11 +6,11 @@ import { CtaLink } from "./CtaLink";
 
 export const LayoutHeaderNavItem: React.FC<{
   name: string;
-  href: string;
-}> = ({ name, href }) => (
-  <a href={href} className="group flex items-center font-medium">
+  to: string;
+}> = ({ name, to }) => (
+  <Link to={to} className="group flex items-center font-medium">
     <span className="text-lg transition group-hover:text-primary">{name}</span>
-  </a>
+  </Link>
 );
 
 const LayoutHeader: React.FC = () => {
@@ -22,19 +22,18 @@ const LayoutHeader: React.FC = () => {
         <div className="flex items-center gap-2">
           <Logo />
           <div className="ml-4 mt-1 flex items-center gap-6">
-            <LayoutHeaderNavItem name="Pricing" href="/pricing" />
-            <LayoutHeaderNavItem name="Demo" href="/demo" />
-            <LayoutHeaderNavItem name="About" href="/about" />
-            <LayoutHeaderNavItem name="Blog" href="/blog" />
-            <LayoutHeaderNavItem name="Help" href="/help" />
+            <LayoutHeaderNavItem name="Pricing" to="/pricing" />
+            <LayoutHeaderNavItem name="About" to="/about" />
+            <LayoutHeaderNavItem name="Blog" to="/blog" />
+            <LayoutHeaderNavItem name="Help" to="/help" />
           </div>
         </div>
 
         {user ? (
-          <LayoutHeaderNavItem name="Go to App" href="/areas" />
+          <LayoutHeaderNavItem name="Go to App" to="/areas" />
         ) : (
           <div className="flex items-center gap-6">
-            <LayoutHeaderNavItem name="Login" href="/login" />
+            <LayoutHeaderNavItem name="Login" to="/login" />
             <CtaLink />
           </div>
         )}

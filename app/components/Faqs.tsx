@@ -31,16 +31,6 @@ const Faqs: React.FC = () => {
             <h2 className="text-3xl font-extrabold text-gray-900">
               Frequently asked questions
             </h2>
-            <p className="mt-4 text-lg text-gray-500">
-              Can’t find the answer you’re looking for? Reach out to our{" "}
-              <a
-                href="/help"
-                className="font-medium text-indigo-600 hover:text-indigo-500"
-              >
-                help
-              </a>{" "}
-              page.
-            </p>
           </div>
           <div className="mt-12 lg:col-span-2 lg:mt-0">
             <dl className="space-y-12">

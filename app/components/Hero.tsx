@@ -1,3 +1,4 @@
+import { Link } from "@remix-run/react";
 import { Container } from "~/components/Container";
 import { Button } from "./Button";
 import { CtaLink } from "./layout/marketing/CtaLink";
@@ -26,12 +27,7 @@ export function Hero() {
       </p>
       <div className="mt-10 flex justify-center gap-x-6">
         <CtaLink />
-        <Button
-          href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-          variant="outline"
-        >
-          Explore Demo
-        </Button>
+        <Link to="/demo">Explore Demo</Link>
       </div>
 
       <section className="mt-32 mb-12">

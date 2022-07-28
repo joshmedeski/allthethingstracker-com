@@ -12,6 +12,12 @@ export function getActivity({
 }) {
   return prisma.activity.findFirst({
     where: { id, userId },
+    select: {
+      name: true,
+      imageUrl: true,
+      areaId: true,
+      area: { select: { name: true } },
+    },
   });
 }
 

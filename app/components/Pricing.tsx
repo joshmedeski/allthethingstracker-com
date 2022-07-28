@@ -1,30 +1,18 @@
 /* This example requires Tailwind CSS v2.0+ */
 
+import { Link } from "@remix-run/react";
 import { CheckIcon } from "./icons";
 
 const tiers = [
   {
     name: "Hobbiest",
-    href: "#",
+    to: "/get-started",
     priceMonthly: 0,
     description: "Get all the basics, it's on the house.",
     features: [
       "High level view of areas in your life",
       "Track ongoing activities",
-      "Weekly and monthly reports",
-    ],
-  },
-  {
-    name: "Power User",
-    href: "#",
-    priceMonthly: 5,
-    priceAnnually: 60,
-    description: "Take your productivity to the next level.",
-    features: [
-      "...everything that's free",
-      "Quarterly and yearly reports",
-      "Custom notifications for your goals",
-      "Access to new featers first",
+      "Log events when they happen",
     ],
   },
 ];
@@ -39,11 +27,11 @@ const Pricing: React.FC = () => {
               Pricing
             </h2>
             <p className="text-3xl font-extrabold text-white sm:text-4xl lg:text-5xl">
-              Free forever, upgrade when you're ready.
+              Free for all.
             </p>
             <p className="text-xl text-gray-300">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Harum
-              sequi unde repudiandae natus.
+              No credit card required. No commitment. No hidden fees. Just a
+              helpful app.
             </p>
           </div>
         </div>
@@ -52,7 +40,7 @@ const Pricing: React.FC = () => {
         <div className="relative">
           <div className="absolute inset-0 h-3/4 bg-gray-900" />
           <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="mx-auto max-w-md space-y-4 lg:grid lg:max-w-5xl lg:grid-cols-2 lg:gap-5 lg:space-y-0">
+            <div className="mx-auto max-w-md space-y-4 lg:grid lg:max-w-5xl lg:grid-cols-1 lg:gap-5 lg:space-y-0">
               {tiers.map((tier) => (
                 <div
                   key={tier.name}
@@ -96,13 +84,13 @@ const Pricing: React.FC = () => {
                       ))}
                     </ul>
                     <div className="rounded-md shadow">
-                      <a
-                        href={tier.href}
+                      <Link
+                        to={tier.to}
                         className="flex items-center justify-center rounded-md border border-transparent bg-cta px-5 py-3 text-base font-medium text-background transition"
                         aria-describedby="tier-standard"
                       >
                         Get started
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>

@@ -1,24 +1,16 @@
 import type { LoaderFunction } from "@remix-run/node";
-import { json } from "@remix-run/node";
-import { Form, Link, NavLink, Outlet, useLoaderData } from "@remix-run/react";
-
+import { redirect } from "@remix-run/node";
+import { Form, Outlet } from "@remix-run/react";
 import { requireUserId } from "~/session.server";
-import { getAreaListItems } from "~/models/area.server";
 import Logo from "~/components/Logo";
-
-type LoaderData = {
-  areaListItems: Awaited<ReturnType<typeof getAreaListItems>>;
-};
 
 export const loader: LoaderFunction = async ({ request }) => {
   const userId = await requireUserId(request);
-  const areaListItems = await getAreaListItems({ userId });
-  return json<LoaderData>({ areaListItems });
+  if (!userId) return redirect("/login");
+  return null;
 };
 
-export default function AreasPage() {
-  const data = useLoaderData() as LoaderData;
-
+export default function AppLayout() {
   return (
     <div className="flex h-full min-h-screen flex-col">
       <header className="flex items-center justify-between p-4">

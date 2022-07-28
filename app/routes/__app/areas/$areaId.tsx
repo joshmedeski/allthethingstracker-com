@@ -2,7 +2,6 @@ import type { ActionArgs, LoaderArgs, LoaderFunction } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { Form, Link, Outlet, useCatch, useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
-import NewActivityPlaceholder from "~/components/activities/NewActivityPlaceholder";
 import BackToAreasLink from "~/components/areas/BackToAreasLink";
 import Image from "~/components/giphy/Image";
 
