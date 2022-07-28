@@ -20,7 +20,7 @@ export const CtaLink: React.FC = ({ children }) => {
     >
       <span
         className={clsx([
-          "bg-cta-subtle bg-opacity-10",
+          "",
           "-top-4 -right-2",
           "group-hover:ovwerflow-hidden absolute",
           "h-16 w-16 group-hover:w-full",

@@ -40,11 +40,7 @@ type LoaderData = {
 
 export const loader: LoaderFunction = async ({ request }) => {
   const { getTheme } = await themeSessionResolver(request);
-
-  console.log("getTheme: ", getTheme);
   const theme = getTheme();
-  console.log("theme: ", theme);
-
   return json<LoaderData>({
     user: await getUser(request),
     theme,
@@ -68,6 +64,13 @@ function App() {
         <Outlet />
         <ScrollRestoration />
         <Scripts />
+        {process.env.NODE_ENV === "production" && (
+          <script
+            src="https://cdn.usefathom.com/script.js"
+            data-site="SSSMOPFC"
+            defer
+          ></script>
+        )}
         {process.env.NODE_ENV === "development" && <LiveReload />}
       </body>
     </html>

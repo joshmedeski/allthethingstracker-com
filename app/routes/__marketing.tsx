@@ -12,7 +12,17 @@ const MarketingLayout: React.FC = () => {
           <Outlet />
         </div>
       </section>
-      <footer>Footer</footer>
+      <footer className="mx-4 my-2">
+        &copy; {new Date().getUTCFullYear()} All the Things Tracker.{" "}
+        <a
+          href="https://github.com/joshmedeski/allthethingstracker-com"
+          rel="noopener noreferrer"
+          target="_blank"
+          className="underline"
+        >
+          Sorce code on GitHub
+        </a>
+      </footer>
     </div>
   );
 };

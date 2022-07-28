@@ -41,7 +41,7 @@ module.exports = {
           800: "var(--color-cta-800)",
           900: "var(--color-cta-900)",
           DEFAULT: "var(--color-cta-default)",
-          subtle: "var(--color-cta-sudbtle)",
+          subtle: "var(--color-cta-subtle)",
         },
 
         uncommon: {

@@ -10,7 +10,7 @@ const Logo: React.FC = () => {
           alt="All the Things"
           className="mr-1 h-12 rounded-xl bg-white"
         />
-        <h1 className="text-2xl font-bold">All The Things Tracker</h1>
+        <h1 className="text-2xl font-bold">All the Things Tracker</h1>
       </div>
     </Link>
   );

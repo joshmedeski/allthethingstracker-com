@@ -11,7 +11,6 @@ import { getUserId, createUserSession } from "~/session.server";
 
 import { createUser, getUserByEmail } from "~/models/user.server";
 import { safeRedirect, validateEmail } from "~/utils";
-import MarketingLayout from "~/components/layout/marketing";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const userId = await getUserId(request);
