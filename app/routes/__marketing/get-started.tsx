@@ -180,17 +180,6 @@ const GetStartedRoute: React.FC = () => {
           <div className="lg:grid lg:grid-cols-12 lg:gap-8">
             <div className="px-4 sm:px-6 sm:text-center md:mx-auto md:max-w-2xl lg:col-span-6 lg:flex lg:items-center lg:text-left">
               <div>
-                <Link
-                  to="/contribute"
-                  className="inline-flex items-center rounded-full bg-gray-900 p-1 pr-2 text-white hover:text-gray-200 sm:text-base lg:text-sm xl:text-base"
-                >
-                  <span className="rounded-full bg-primary px-3 py-0.5 text-xs font-semibold uppercase leading-5 tracking-wide text-foreground">
-                    Help Wanted
-                  </span>
-                  <span className="ml-4 mr-2 text-sm">
-                    Contribute to the open-source project!
-                  </span>
-                </Link>
                 <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-white sm:mt-5 sm:leading-none lg:mt-6 lg:text-5xl xl:text-6xl">
                   <span className="md:block">Start tracking</span>{" "}
                   <span className="text-cta md:block">all the things</span>
@@ -201,34 +190,6 @@ const GetStartedRoute: React.FC = () => {
                   that often get ignored and start finding focus and
                   peace-of-mind.
                 </p>
-                <p className="mt-8 text-sm font-semibold uppercase tracking-wide text-white sm:mt-10">
-                  Used by
-                </p>
-                <div className="mt-5 w-full sm:mx-auto sm:max-w-lg lg:ml-0">
-                  <div className="flex flex-wrap items-start justify-between">
-                    <div className="flex justify-center px-1">
-                      <img
-                        className="h-9 sm:h-10"
-                        src="https://tailwindui.com/img/logos/tuple-logo-gray-400.svg"
-                        alt="Tuple"
-                      />
-                    </div>
-                    <div className="flex justify-center px-1">
-                      <img
-                        className="h-9 sm:h-10"
-                        src="https://tailwindui.com/img/logos/workcation-logo-gray-400.svg"
-                        alt="Workcation"
-                      />
-                    </div>
-                    <div className="flex justify-center px-1">
-                      <img
-                        className="h-9 sm:h-10"
-                        src="https://tailwindui.com/img/logos/statickit-logo-gray-400.svg"
-                        alt="StaticKit"
-                      />
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
             <div className="mt-16 sm:mt-24 lg:col-span-6 lg:mt-0">
