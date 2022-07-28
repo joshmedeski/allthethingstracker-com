@@ -10,10 +10,10 @@ generator client {
 }
 
 model User {
-  id       String @id @default(cuid())
   email    String @unique
   password Password?
 
+  id       String @id @default(cuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -29,9 +29,10 @@ model Password {
 }
 
 model Area {
-  id   String @id @default(cuid())
   name String
   imageUrl String
+
+  id   String @id @default(cuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -45,9 +46,10 @@ model Area {
 }
 
 model Activity {
-  id   String @id @default(cuid())
   name String
   imageUrl String
+
+  id   String @id @default(cuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -65,12 +67,11 @@ model Activity {
 }
 
 model Event {
+  happenedAt DateTime @default(now())
+
   id   String @id @default(cuid())
-  name String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
-
-  happenedAt DateTime @default(now())
 
   user   User   @relation(fields: [userId], references: [id])
   userId String

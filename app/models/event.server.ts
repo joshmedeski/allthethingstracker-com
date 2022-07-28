@@ -24,16 +24,16 @@ export function getEventListItems({ userId }: { userId: User["id"] }) {
 }
 
 export function createEvent({
-  name,
+  happenedAt,
   activityId,
   userId,
-}: Pick<Event, "name"> & {
+}: Pick<Event, "happenedAt"> & {
   userId: User["id"];
   activityId: Activity["id"];
 }) {
   return prisma.event.create({
     data: {
-      name,
+      happenedAt,
       activity: { connect: { id: activityId } },
       user: { connect: { id: userId } },
     },

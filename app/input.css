@@ -118,3 +118,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.react-datepicker-wrapper {
+  @apply block w-full !important;
+}
+
+.react-datepicker {
+  @apply border-gray-200 !important;
+}
+
+.react-datepicker-popper[data-placement^="bottom"]
+  .react-datepicker__triangle::before {
+  @apply border-white !important;
+}
+
+.react-datepicker .react-datepicker__header {
+  @apply border-b-gray-200 bg-gray-100 !important;
+}
+
+.react-datepicker .react-datepicker__navigation-icon--previous {
+  @apply top-1;
+}
+
+.react-datepicker .react-datepicker__navigation-icon--next {
+  @apply top-1;
+}
+
+.react-datepicker .react-datepicker__day--selected {
+  @apply bg-primary-500 !important;
+}

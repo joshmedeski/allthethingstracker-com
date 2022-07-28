@@ -3,12 +3,17 @@ import { redirect } from "@remix-run/node";
 import { Form, Outlet } from "@remix-run/react";
 import { requireUserId } from "~/session.server";
 import Logo from "~/components/Logo";
+import datePickerStyles from "react-datepicker/dist/react-datepicker.css";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const userId = await requireUserId(request);
   if (!userId) return redirect("/login");
   return null;
 };
+
+export function links() {
+  return [{ rel: "stylesheet", href: datePickerStyles }];
+}
 
 export default function AppLayout() {
   return (
