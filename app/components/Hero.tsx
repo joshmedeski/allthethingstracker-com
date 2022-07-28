@@ -27,7 +27,6 @@ export function Hero() {
       </p>
       <div className="mt-10 flex justify-center gap-x-6">
         <CtaLink />
-        <Link to="/demo">Explore Demo</Link>
       </div>
 
       <section className="mt-32 mb-12">
