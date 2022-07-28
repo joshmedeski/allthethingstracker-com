@@ -21,13 +21,6 @@
     "validate": "run-p \"test -- --run\" lint typecheck test:e2e:run"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.1.1",
-    "@fortawesome/free-solid-svg-icons": "^6.1.1",
-    "@fortawesome/pro-duotone-svg-icons": "^6.1.1",
-    "@fortawesome/pro-light-svg-icons": "^6.1.1",
-    "@fortawesome/pro-regular-svg-icons": "^6.1.1",
-    "@fortawesome/pro-solid-svg-icons": "^6.1.1",
-    "@fortawesome/react-fontawesome": "^0.2.0",
     "@giphy/js-fetch-api": "^4.3.1",
     "@giphy/react-components": "^5.12.0",
     "@headlessui/react": "^1.6.5",

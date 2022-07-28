@@ -17,7 +17,10 @@ export function getActivity({
       imageUrl: true,
       areaId: true,
       area: { select: { name: true } },
-      events: { select: { id: true, happenedAt: true } },
+      events: {
+        select: { id: true, happenedAt: true },
+        orderBy: { happenedAt: "desc" },
+      },
     },
   });
 }

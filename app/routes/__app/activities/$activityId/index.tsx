@@ -1,7 +1,7 @@
 import type { LoaderArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { format } from "date-fns";
+import { format, formatDistance } from "date-fns";
 import invariant from "tiny-invariant";
 import NewEventPlaceholder from "~/components/events/AddEventPlaceholder";
 
@@ -23,13 +23,27 @@ export default function ActivityIndexPage() {
     <div>
       <h2 className="mb-4 text-3xl font-bold">Events</h2>
       <NewEventPlaceholder />
-      <ul className="ml-4 list-disc">
-        {activity.events.map((event) => (
-          <li key={event.id}>
-            {format(new Date(event.happenedAt), "EEE, MMM do, yyyy")}
-          </li>
-        ))}
-      </ul>
+      {activity.events.length ? (
+        <div>
+          <div>
+            Last happened{" "}
+            {formatDistance(
+              new Date(activity.events[0].happenedAt),
+              new Date(),
+              { addSuffix: true }
+            )}
+          </div>
+          <ul className="ml-4 list-disc">
+            {activity.events.map((event) => (
+              <li key={event.id}>
+                {format(new Date(event.happenedAt), "EEE, MMM do, yyyy")}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : (
+        <p>No events found</p>
+      )}
     </div>
   );
 }
