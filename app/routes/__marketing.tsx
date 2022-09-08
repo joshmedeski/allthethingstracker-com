@@ -21,6 +21,24 @@ const MarketingLayout: React.FC = () => {
           className="underline"
         >
           Sorce code on GitHub
+        </a>{" "}
+        Thanks to
+        <a
+          href="https://planetscale.com"
+          rel="noopener noreferrer"
+          target="_blank"
+          className="underline"
+        >
+          PlanetScale
+        </a>{" "}
+        and{" "}
+        <a
+          href="https://planetscale.com"
+          rel="noopener noreferrer"
+          target="_blank"
+          className="underline"
+        >
+          Hashnode
         </a>
       </footer>
     </div>
