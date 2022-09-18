@@ -12,14 +12,14 @@ const founders = [
 
 export default function Founders() {
   return (
-    <div className="bg-white">
+    <div className="bg-background">
       <div className="mx-auto max-w-7xl py-12 px-4 sm:px-6 lg:px-8 lg:py-24">
         <div className="space-y-12 lg:grid lg:grid-cols-3 lg:gap-8 lg:space-y-0">
           <div className="space-y-5 sm:space-y-4">
             <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
               Founder{founders.length > 1 ? "s" : ""}
             </h2>
-            <p className="text-xl text-gray-500">
+            <p className="text-subtle text-xl">
               Founded in Summer 2022, here's the team that brought this project
               to life.
             </p>
@@ -43,7 +43,7 @@ export default function Founders() {
                           <p className="text-uncommon">{role}</p>
                         </div>
                         <div className="text-lg">
-                          <p className="text-gray-500">{bio}</p>
+                          <p className="text-subtle">{bio}</p>
                         </div>
                         <ul className="flex space-x-5">
                           <li>

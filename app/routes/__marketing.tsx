@@ -12,7 +12,7 @@ const MarketingLayout: React.FC = () => {
           <Outlet />
         </div>
       </section>
-      <footer className="mx-4 my-2">
+      <footer className="text-subtle mx-4 my-2 text-sm">
         &copy; {new Date().getUTCFullYear()} All the Things Tracker.{" "}
         <a
           href="https://github.com/joshmedeski/allthethingstracker-com"
@@ -22,7 +22,7 @@ const MarketingLayout: React.FC = () => {
         >
           Sorce code on GitHub
         </a>{" "}
-        Thanks to
+        Thanks to{" "}
         <a
           href="https://planetscale.com"
           rel="noopener noreferrer"

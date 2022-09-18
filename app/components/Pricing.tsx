@@ -70,14 +70,15 @@ const Pricing: React.FC = () => {
                       {tier.description}
                     </p>
                   </div>
-                  <div className="flex flex-1 flex-col justify-between space-y-6 bg-gray-50 px-6 pt-6 pb-8 sm:p-10 sm:pt-6">
+
+                  <div className="flex flex-1 flex-col justify-between space-y-6 bg-neutral-subtle px-6 pt-6 pb-8 shadow shadow-neutral sm:p-10 sm:pt-6">
                     <ul className="space-y-4">
                       {tier.features.map((feature) => (
                         <li key={feature} className="flex items-start">
                           <div className="flex-shrink-0">
                             <CheckIcon aria-hidden="true" />
                           </div>
-                          <p className="ml-3 text-base text-gray-700">
+                          <p className="text-subtle ml-3 text-base">
                             {feature}
                           </p>
                         </li>
